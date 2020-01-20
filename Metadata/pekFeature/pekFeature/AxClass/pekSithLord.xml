@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekSithLord</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.ComponentModel.Composition;
+
+/// <summary>
+/// Implements a sith lord
+/// </summary>
+[Export(identifierStr(Dynamics.AX.Application.pekIJediType)),
+    ExportMetadata(enumStr(pekJediType), enumLiteralStr(pekJediType, SithLord))]
+public class pekSithLord implements pekIJediType
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>isEvil</Name>
+				<Source><![CDATA[
+    boolean isEvil()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getType</Name>
+				<Source><![CDATA[
+    pekJediType getType()
+    {
+        return pekJediType::SithLord;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

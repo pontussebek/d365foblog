@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleCheckContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Contract class for rule checks
+/// </summary>
+public class pekRuleCheckContract
+{
+    private CustTable custTable;
+    private boolean actionOne;
+    private boolean actionTwo;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    private void new()
+    {
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newFromParameters</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a new contract instance from parameters
+    /// </summary>
+    /// <param name = "_custTable">Customer record</param>
+    /// <param name = "_actionOne">Action one</param>
+    /// <param name = "_actionTwo">Action two</param>
+    /// <returns>A new instance of <c>pekRuleCheckContract</c></returns>
+    public static pekRuleCheckContract newFromParameters(CustTable _custTable,
+        boolean _actionOne,
+        boolean _actionTwo)
+    {
+        pekRuleCheckContract pekRuleCheckContract  = new pekRuleCheckContract();
+
+        pekRuleCheckContract.custTable = _custTable;
+        pekRuleCheckContract.actionOne = _actionOne;
+        pekRuleCheckContract.actionTwo = _actionTwo;
+
+        return pekRuleCheckContract;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmCustTable</Name>
+				<Source><![CDATA[
+    public CustTable parmCustTable(CustTable _custTable = custTable)
+    {
+        custTable = _custTable;
+        return custTable; 
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmActionOne</Name>
+				<Source><![CDATA[
+    public boolean parmActionOne(boolean _actionOne = actionOne)
+    {
+        actionOne = _actionOne;
+        return actionOne;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmActionTwo</Name>
+				<Source><![CDATA[
+    public boolean parmActionTwo(boolean _actionTwo = actionTwo)
+    {
+        actionTwo = _actionTwo;
+        return actionTwo;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

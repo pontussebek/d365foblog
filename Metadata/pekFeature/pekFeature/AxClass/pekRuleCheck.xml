@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleCheck</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class to check the result of a rule
+/// </summary>
+public final class pekRuleCheck
+{
+    private pekIRuleBlock ruleBlock;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    private void new()
+    {
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>checkRule</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Check the result of a rule
+    /// </summary>
+    /// <param name = "_ruleCheckContract">Contract containing the parameters for the check</param>
+    /// <returns>True if the rule applies; otherwise false</returns>
+    public boolean checkRule(pekRuleCheckContract _ruleCheckContract)
+    {
+        boolean ruleCheck;
+
+        if (ruleBlock.shouldRuleBeEvaluated(_ruleCheckContract))
+        {
+            ruleCheck = ruleBlock.checkRule(_ruleCheckContract);
+        }
+
+        return ruleCheck;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newFromBlockRule</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a new <c>pekRuleCheck</c>
+    /// </summary>
+    /// <param name = "_ruleBlock">The blocking rule that should be applied</param>
+    /// <returns>A new instance of <c>pekRuleCheck</c></returns>
+    public static pekRuleCheck newFromBlockRule(pekIRuleBlock _ruleBlock)
+    {
+        if (!_ruleBlock)
+        {
+            throw error(Error::wrongUseOfFunction(funcName()));
+        }
+
+        pekRuleCheck ruleCheck = new pekRuleCheck();
+
+        ruleCheck.ruleBlock = _ruleBlock;
+
+        return ruleCheck;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

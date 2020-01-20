@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekFruitApple</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.ComponentModel.Composition;
+
+/// <summary>
+/// Implmentation of a Apple
+/// </summary>
+[Export(identifierStr(Dynamics.AX.Application.pekFruit)),
+    ExportMetadata(enumStr(pekFruitType), enumLiteralStr(pekFruitType, Apple))]
+public class pekFruitApple extends pekFruit
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getName</Name>
+				<Source><![CDATA[
+    Name getName()
+    {
+        return 'Apple';
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

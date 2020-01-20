@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleCheckBadExample</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class to check the result of a rule
+/// 
+/// This example depends on the concrete class pekRuleBlockExample and not an interface, forces us to
+/// create a concrete instance instead of a single mock behind an interface and in pekRuleCheck
+/// when unit testing this class.
+/// 
+/// A better implementation can be found in <c>pekRuleCheck</c>
+/// </summary>
+public class pekRuleCheckBadExample     
+{
+    private pekRuleBlockExample ruleBlock;          
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    private void new()
+    {
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>checkRule</Name>
+				<Source><![CDATA[
+    public boolean checkRule(pekRuleCheckContract _ruleCheckContract)
+    {
+        boolean ruleCheck;
+
+        if (ruleBlock.shouldRuleBeEvaluated(_ruleCheckContract))
+        {
+            ruleCheck = ruleBlock.checkRule(_ruleCheckContract);
+        }
+
+        return ruleCheck;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newFromBlockRule</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a new <c>pekRuleCheckBadExample</c>
+    /// </summary>
+    /// <param name = "_ruleBlock">The blocking rule that should be applied</param>
+    /// <returns>A new instance of <c>pekRuleCheckBadExample</c></returns>
+    public static pekRuleCheckBadExample newFromBlockRule(pekRuleBlockExample _ruleBlock)
+    {
+        if (!_ruleBlock)
+        {
+            throw error(Error::wrongUseOfFunction(funcName()));
+        }
+
+        pekRuleCheckBadExample ruleCheck = new pekRuleCheckBadExample();
+
+        ruleCheck.ruleBlock = _ruleBlock;
+
+        return ruleCheck;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

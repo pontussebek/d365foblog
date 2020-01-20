@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekSteamboat</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class that represent a steamboat
+/// </summary>
+internal class pekSteamboat implements pekIBoat
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>fullSpeedAhead</Name>
+				<Source><![CDATA[
+    boolean fullSpeedAhead()
+    {
+        info('Chu chu');
+        return true;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

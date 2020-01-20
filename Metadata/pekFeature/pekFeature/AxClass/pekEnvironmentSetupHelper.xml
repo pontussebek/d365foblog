@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekEnvironmentSetupHelper</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public final class pekEnvironmentSetupHelper
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>enablePekTestingFeature</Name>
+				<Source><![CDATA[
+    public static void enablePekTestingFeature(boolean _value)
+    {
+        const str pekTestingFeatureName = @'Dynamics.AX.Application.pekTestingFeature';
+
+        FeatureManagementEntity entity;
+
+        ttsbegin;
+        select forupdate entity 
+            where entity.Name == pekTestingFeatureName;
+
+        if(entity)
+        {
+            entity.Enabled = _value;
+            entity.update();
+        }
+        else
+        {
+            throw Error('Error when trying to enable or disable feature');
+        }
+        ttscommit;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

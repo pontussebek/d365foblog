@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekIJediType</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using Microsoft.Dynamics.AX.Platform.Extensibility;
+
+/// <summary>
+/// Interface that represents a jedi type
+/// </summary>
+[ExportInterface()]
+public interface pekIJediType
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>isEvil</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Is the jedi type evil?
+    /// </summary>
+    /// <returns>True if jedi type is evil; otherwise false</returns>
+    boolean isEvil()
+    {
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getType</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Get the jedi type
+    /// </summary>
+    /// <returns>Type of a the jedi as <c>pekJediType</c></returns>
+    pekJediType getType()
+    {
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

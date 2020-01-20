@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekIBoat</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Interface used for creating new boat types
+/// </summary>
+internal interface pekIBoat
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>fullSpeedAhead</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Make the boat go full speed ahead
+    /// </summary>
+    /// <returns>true if successful; otherwise false</returns>
+    boolean fullSpeedAhead()
+    {
+
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

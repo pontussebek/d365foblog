@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCalculator</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class used to perform calculus
+/// </summary>
+public class pekCalculator 
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>SumIntegers</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Sum two integers
+    /// </summary>
+    /// <param name = "_x">First value to be summed</param>
+    /// <param name = "_y">Second value to be summed</param>
+    /// <returns>The sum of x and y</returns>
+    public int SumIntegers(int _x, int _y)
+    {
+        return _x + _y;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

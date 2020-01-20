@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekJediKnight</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.ComponentModel.Composition;
+
+/// <summary>
+/// Class that implements the jedi knight
+/// </summary>
+[Export(identifierStr(Dynamics.AX.Application.pekIJediType)),
+    ExportMetadata(enumStr(pekJediType), enumLiteralStr(pekJediType, JediKnight))]
+public class pekJediKnight implements pekIJediType
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>isEvil</Name>
+				<Source><![CDATA[
+    boolean isEvil()
+    {
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getType</Name>
+				<Source><![CDATA[
+    pekJediType getType()
+    {
+        return pekJediType::JediKnight;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

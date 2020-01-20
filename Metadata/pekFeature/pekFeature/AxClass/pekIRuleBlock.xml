@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekIRuleBlock</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Blocking rule interface
+/// </summary>
+interface pekIRuleBlock
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>checkRule</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Check if a rule is applicable
+    /// </summary>
+    /// <param name = "_ruleCheckContract">Contract containg the parameters</param>
+    /// <returns>True if rule applies; otherwise false</returns>
+    boolean checkRule(pekRuleCheckContract _ruleCheckContract)
+    {
+    
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>shouldRuleBeEvaluated</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Check if the rule should be evluated
+    /// </summary>
+    /// <param name = "_ruleCheckContract">Contract containg the parameters</param>
+    /// <returns>True if rule should be evaluated; otherwise false</returns>
+    boolean shouldRuleBeEvaluated(pekRuleCheckContract _ruleCheckContract)
+    {
+    
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

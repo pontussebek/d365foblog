@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekFruitFactory</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Factory for creating new fruits
+/// </summary>
+public static class pekFruitFactory
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getFruitType</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a fruit
+    /// </summary>
+    /// <param name = "_fruitType">The type of fruit <c>pekFruitType</c></param>
+    /// <returns>A new instance of a <c>pekFruit</c></returns>
+    public static pekFruit getFruitType(pekFruitType _fruitType)
+    {
+        SysPluginMetadataCollection metadataCollection = new SysPluginMetadataCollection();
+
+        metadataCollection.SetManagedValue(
+            enumStr(pekFruitType), 
+            enum2Symbol(enumNum(pekFruitType), 
+            enum2int(_fruitType)));
+        
+        pekFruit instance = SysPluginFactory::Instance(
+            identifierStr(Dynamics.AX.Application), 
+            classStr(pekFruit), 
+            metadataCollection);
+
+        if (!instance)
+        {
+            throw error(strFmt("@SYS19306", funcName()));
+        }
+
+        return instance;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getAllFruits</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Get all fruits
+    /// </summary>
+    /// <returns>An <c>Array</c> containing a new instance of each fruit</returns>
+    public static Array getAllFruits()
+    {
+        return SysPluginFactory::Instances(
+            identifierStr(Dynamics.AX.Application), 
+            classStr(pekFruit), 
+            new SysPluginMetadataCollection());
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

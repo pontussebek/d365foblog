@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCustomerDetails</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class to extract customer details
+/// </summary>
+public class pekCustomerDetails
+{
+    private CustTable custTable;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getCustomerName</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Get customer name
+    /// </summary>
+    /// <returns>Customer name</returns>
+    public CustName getCustomerName()
+    {
+        return custTable.name();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    private void new()
+    {
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newFromCustTable</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create new <c>pekCustomerDetails</c> from a <c>CustTable</c>
+    /// </summary>
+    /// <param name = "_custTable">Customer table record</param>
+    /// <returns>A new instance of <c>pekCustomerDetails</c></returns>
+    public static pekCustomerDetails newFromCustTable(CustTable _custTable)
+    {
+        pekCustomerDetails pekCustomerDetails = new pekCustomerDetails();
+
+        pekCustomerDetails.custTable = _custTable;
+
+        return pekCustomerDetails;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newFromSalesTable</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create new <c>pekCustomerDetails</c> from a <c>SalesTable</c>
+    /// </summary>
+    /// <param name = "_salesTable">Sales order record</param>
+    /// <returns>A new instance of <c>pekCustomerDetails</c></returns>
+    public static pekCustomerDetails newFromSalesTable(SalesTable _salesTable)
+    {
+        pekCustomerDetails pekCustomerDetails = new pekCustomerDetails();
+
+        pekCustomerDetails.custTable = CustTable::find(_salesTable.CustAccount);
+
+        return pekCustomerDetails;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

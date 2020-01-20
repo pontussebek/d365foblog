@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekFruit</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using Microsoft.Dynamics.AX.Platform.Extensibility;
+
+/// <summary>
+/// Base class for fruits
+/// </summary>
+[ExportInterface]
+public abstract class pekFruit
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getName</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Get the fruit name
+    /// </summary>
+    /// <returns>Fruit name as a <c>Name</c></returns>
+    abstract public Name getName()
+    {
+
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

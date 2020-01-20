@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleBlockExample</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Blocking rule implementation
+/// </summary>
+public final class pekRuleBlockExample implements pekIRuleBlock
+{
+    SalesTable salesTable; 
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    private void new()
+    {
+        super();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>checkRule</Name>
+				<Source><![CDATA[
+    boolean checkRule(pekRuleCheckContract _ruleCheckContract)
+    {
+        if(salesTable)  //Ads dependency on a SalesTable record to be created
+        {
+            return salesTable.CustInvoiceId != '';
+        }
+
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>shouldRuleBeEvaluated</Name>
+				<Source><![CDATA[
+    boolean shouldRuleBeEvaluated(pekRuleCheckContract _ruleCheckContract)
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newPekRuleBlockExampleFromSalesTable</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a new blocking rule from a <c>SalesTable</c> record
+    /// </summary>
+    /// <param name = "_salesTable">Sales order for which the rule is created</param>
+    /// <returns>A new instance of <c>pekRuleBlockExample</c></returns>
+    public static pekRuleBlockExample newPekRuleBlockExampleFromSalesTable(SalesTable _salesTable)
+    {
+        pekRuleBlockExample pekRuleBlockExample = new pekRuleBlockExample();
+
+        pekRuleBlockExample.salesTable = _salesTable;
+
+        return pekRuleBlockExample;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

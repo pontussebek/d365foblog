@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekJediTypeFactory</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Factory for creating jedi types
+/// </summary>
+public static class pekJediTypeFactory
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getJediType</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a new jedi type
+    /// </summary>
+    /// <param name = "_jediType"><c>pekJediType</c> that indicates what jedi type to be created</param>
+    /// <returns>A new jedi type instance as <c>pekIJediType</c></returns>
+    public static pekIJediType getJediType(pekJediType _jediType)
+    {
+        SysPluginMetadataCollection metadataCollection = new SysPluginMetadataCollection();
+        
+        metadataCollection.SetManagedValue(
+            enumStr(pekJediType),
+            enum2Symbol(enumNum(pekJediType),
+            enum2int(_jediType)));
+        
+        pekIJediType instance = SysPluginFactory::Instance(
+            identifierStr(Dynamics.AX.Application),
+            classStr(pekIJediType),
+            metadataCollection);
+
+        if (!instance)
+        {
+            throw error(strFmt("@SYS19306", funcName()));
+        }
+
+        return instance;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getAllJediTypes</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Get all jedi types
+    /// </summary>
+    /// <returns>An <c>Array</c> containing a new instance of each jedi type</returns>
+    public static Array getAllJediTypes()
+    {
+        return SysPluginFactory::Instances(
+            identifierStr(Dynamics.AX.Application),
+            classStr(pekIJediType),
+            new SysPluginMetadataCollection());
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
