@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCustGroupFormActionTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using pekCustGroupFormAdaptor = Microsoft.Dynamics.AX.TypeProviders.FormAdaptors.FormAdaptorTypeProvider@[formStr(pekCustGroup)];
+
+[SysTestGranularity(SysTestGranularity::Integration)]
+[SysTestTarget(formStr(pekCustGroup), UtilElementType::Form)]
+[SysTestSecurity('pekPersona', [roleStr(pekManager), roleStr(TestEssentialsRole)], true)]
+public final class pekCustGroupFormActionTest extends SysTestCase
+{
+    private const SysGroup CustGroupId = 'CGUT';
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testActionOnGrid</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test an action in a grid
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testActionOnGrid()
+    {
+        //Arrange
+        pekCustGroup pekCustGroup = pekDataCreation::createCustGroup(CustGroupId, CustGroupId);
+
+        //Act
+        using (pekCustGroupFormAdaptor pekCustGroupFrom = pekCustGroupFormAdaptor::open())
+        {
+            pekCustGroupFrom.Grid().FilterToOne(pekCustGroupFrom.Grid_CustGroup(), CustGroupId);
+            this.assertEquals(CustGroupId, pekCustGroupFrom.Grid_Name().getStrValue());
+
+            pekCustGroupFrom.ActionButton().click();
+        }
+
+        //Assert, perform assert of the result of the action below
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

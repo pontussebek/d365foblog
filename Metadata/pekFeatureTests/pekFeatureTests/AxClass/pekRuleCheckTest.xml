@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleCheckTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekRuleCheck), UtilElementType::Class)]
+public final class pekRuleCheckTest extends SysTestCase
+{
+    pekRuleCheckContract ruleCheckContract;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testShouldRuleBeEvaluatedFalseCheckRuleTrue</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that the expected result is returned when rule should not be evaluated and check should return true
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testShouldRuleBeEvaluatedFalseCheckRuleTrue()
+    {
+        //Arrange
+        pekIRuleBlock pekIRuleBlock = this.getPekRuleBlockMock(false, true);
+
+        pekRuleCheck pekRuleCheck = pekRuleCheck::newFromBlockRule(pekIRuleBlock);
+
+        //Act
+        boolean result = pekRuleCheck.checkRule(ruleCheckContract);
+
+        //Assert
+        this.assertFalse(result);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>testShouldRuleBeEvaluatedFalseCheckRuleFalse</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that the expected result is returned when rule should not be evaluated and check should return false
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testShouldRuleBeEvaluatedFalseCheckRuleFalse()
+    {
+        //Arrange
+        pekIRuleBlock pekIRuleBlock = this.getPekRuleBlockMock(false, false);
+
+        pekRuleCheck pekRuleCheck = pekRuleCheck::newFromBlockRule(pekIRuleBlock);
+
+        //Act
+        boolean result = pekRuleCheck.checkRule(ruleCheckContract);
+
+        //Assert
+        this.assertFalse(result);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>testShouldRuleBeEvaluatedTrueCheckRuleTrue</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that the expected result is returned when rule should be evaluated and check should return true
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testShouldRuleBeEvaluatedTrueCheckRuleTrue()
+    {
+        //Arrange
+        pekIRuleBlock pekIRuleBlock = this.getPekRuleBlockMock(true, true);
+
+        pekRuleCheck pekRuleCheck = pekRuleCheck::newFromBlockRule(pekIRuleBlock);
+
+        //Act
+        boolean result = pekRuleCheck.checkRule(ruleCheckContract);
+
+        //Assert
+        this.assertTrue(result);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>testShouldRuleBeEvaluatedTrueCheckRuleFalse</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that the expected result is returned when rule should be evaluated and check should return false
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testShouldRuleBeEvaluatedTrueCheckRuleFalse()
+    {
+        //Arrange
+        pekIRuleBlock pekIRuleBlock = this.getPekRuleBlockMock(true, false);
+
+        pekRuleCheck pekRuleCheck = pekRuleCheck::newFromBlockRule(pekIRuleBlock);
+
+        //Act
+        boolean result = pekRuleCheck.checkRule(ruleCheckContract);
+
+        //Assert
+        this.assertFalse(result);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getPekRuleBlockMock</Name>
+				<Source><![CDATA[
+    private pekRuleBlockMock getPekRuleBlockMock(boolean _shouldRuleBeEvaluatedReturnResult,boolean _checkRuleReturnResult)
+    {
+        pekRuleBlockMock pekRuleBlockMock = new pekRuleBlockMock();
+        pekRuleBlockMock.shouldRuleBeEvaluatedReturnResult = _shouldRuleBeEvaluatedReturnResult;
+        pekRuleBlockMock.checkRuleReturnResult = _checkRuleReturnResult;
+
+        return pekRuleBlockMock;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekJediTypeFactoryTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekJediTypeFactory), UtilElementType::Class)]
+public final class pekJediTypeFactoryTest extends SysTestCase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testGetAllJediTypes</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that all jedi types are returned as expected.
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testGetAllJediTypes()
+    {
+        // Arrange
+        int expectedJediTypes = new DictEnum(enumNum(pekJediType)).values() - 1; // Except first 'None' value
+
+        // Act
+        Array allJediTypes = pekJediTypeFactory::getAllJediTypes();
+        
+        // Assert
+        this.assertEquals(expectedJediTypes, allJediTypes.lastIndex());
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>testGetJediType</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that creating each jedi type works as expected
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testGetJediType()
+    {
+        //Arrange
+        
+        //Act
+        pekIJediType jediKnight = pekJediTypeFactory::getJediType(pekJediType::JediKnight);
+        pekIJediType sithLord = pekJediTypeFactory::getJediType(pekJediType::SithLord);
+
+        //Assert
+        this.assertTrue(jediKnight is pekJediKnight);
+        this.assertTrue(sithLord is pekSithLord);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

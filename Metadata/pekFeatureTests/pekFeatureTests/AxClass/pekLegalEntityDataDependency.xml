@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekLegalEntityDataDependency</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestCaseDataDependency('USMF')]
+public final class pekLegalEntityDataDependency extends SysTestCase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testFeatureXXX</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// A test that will be executed in the USMF Contoso company
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testFeatureXXX()
+    {
+        //Code will be executed in the USMF company due to attribute above class def
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

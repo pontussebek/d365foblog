@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCustGroupFormGridTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using pekCustGroupFormAdaptor = Microsoft.Dynamics.AX.TypeProviders.FormAdaptors.FormAdaptorTypeProvider@[formStr(pekCustGroup)];
+
+[SysTestGranularity(SysTestGranularity::Integration)]
+[SysTestTarget(formStr(pekCustGroup), UtilElementType::Form)]
+[SysTestSecurity('pekPersona', [roleStr(pekManager), roleStr(TestEssentialsRole)], true)]
+public final class pekCustGroupFormGridTest extends SysTestCase
+{
+    private const SysGroup CustGroupId = 'CGUT';
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testGridAllowEdit</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test access on a field in grid
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testGridAllowEdit()
+    {
+        //Arrange
+        pekCustGroup pekCustGroup = pekDataCreation::createCustGroup(CustGroupId, CustGroupId);
+
+        //Act
+        using (pekCustGroupFormAdaptor pekCustGroupFrom = pekCustGroupFormAdaptor::open())
+        {
+            pekCustGroupFrom.Grid_CustGroup().filter(CustGroupId);
+            
+            //Assert
+            pekCustGroupFrom.Grid_Name().validateEnabled(true);
+            pekCustGroupFrom.Grid_Name().validateVisible(true);
+            pekCustGroupFrom.Grid_Name().validateEditable(true);
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleBlockMock</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Mock object for <c>pekIRuleBlock</c>
+/// </summary>
+public final class pekRuleBlockMock implements pekIRuleBlock
+{
+    public boolean shouldRuleBeEvaluatedReturnResult;
+    public boolean checkRuleReturnResult;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>checkRule</Name>
+				<Source><![CDATA[
+    boolean checkRule(pekRuleCheckContract _ruleCheckContract)
+    {
+        return shouldRuleBeEvaluatedReturnResult;    
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>shouldRuleBeEvaluated</Name>
+				<Source><![CDATA[
+    boolean shouldRuleBeEvaluated(pekRuleCheckContract _ruleCheckContract)
+    {
+        return checkRuleReturnResult;    
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

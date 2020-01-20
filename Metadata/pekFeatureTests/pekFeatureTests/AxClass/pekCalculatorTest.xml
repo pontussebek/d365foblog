@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCalculatorTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekCalculator), UtilElementType::Class)]
+public final class pekCalculatorTest extends SysTestCase
+{
+    private const int int10 = 10;
+    private const int int5 = 5;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testSumIntegers</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test the sum of two integers
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testSumIntegers()
+    {
+        //Arrange
+        const int expectedSum = 15;
+
+        pekCalculator pekCalculator = new pekCalculator();
+
+        //Act
+        int sumOfInts = pekCalculator.SumIntegers(int10, int5);
+
+        //Assert
+        this.assertEquals(expectedSum, sumOfInts);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

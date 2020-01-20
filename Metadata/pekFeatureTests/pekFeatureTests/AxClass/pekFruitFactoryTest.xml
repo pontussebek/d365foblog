@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekFruitFactoryTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekFruitFactory), UtilElementType::Class)]
+public final class pekFruitFactoryTest extends SysTestCase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testGetAllFruits</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that all fruits are returned as expected. 
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testGetAllFruits()
+    {
+        // Arrange
+        int expectedFruitTypes = new DictEnum(enumNum(pekFruitType)).values();
+
+        // Act
+        Array allFruitTypes = pekFruitFactory::getAllFruits();
+        
+        // Assert
+        this.assertEquals(expectedFruitTypes, allFruitTypes.lastIndex());
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>testGetFruitType</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that creating each fruit works as expected
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testGetFruitType()
+    {
+        //Arrange
+        
+        //Act
+        pekFruit apple = pekFruitFactory::getFruitType(pekFruitType::Apple);
+        pekFruit mango = pekFruitFactory::getFruitType(pekFruitType::Mango);
+        
+        //Assert
+        this.assertTrue(apple is pekFruitApple);
+        this.assertTrue(mango is pekFruitMango);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

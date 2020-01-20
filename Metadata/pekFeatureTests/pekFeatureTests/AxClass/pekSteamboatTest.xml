@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekSteamboatTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekSteamboat), UtilElementType::Class)]
+public final class pekSteamboatTest extends SysTestCase
+{
+    private const int FullSpeedAheadExpectedTrue = true;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testFullSpeedAhead</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that the steamboat can go full speed ahead
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testFullSpeedAhead()
+    {
+        //Arrange
+        pekIBoat pekSteamboat = new pekSteamboat();
+
+        //Act
+        boolean fullSpeedAheadSteamBoat = pekSteamboat.fullSpeedAhead();
+
+        //Assert
+        this.assertTrue(fullSpeedAheadSteamBoat);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

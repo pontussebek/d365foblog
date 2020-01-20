@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekSalesTablePostingScenarioTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using SalesTableFormAdaptor = Microsoft.Dynamics.AX.TypeProviders.FormAdaptors.FormAdaptorTypeProvider@[formStr(SalesTable)];
+using SalesEditLinesFormAdaptor = Microsoft.Dynamics.AX.TypeProviders.FormAdaptors.FormAdaptorTypeProvider@[formStr(SalesEditLines)];
+using SysBoxFormFormAdaptor = Microsoft.Dynamics.AX.TypeProviders.FormAdaptors.FormAdaptorTypeProvider@[formStr(SysBoxForm)];
+
+[SysTestGranularity(SysTestGranularity::Integration)]
+[SysTestCaseDataDependency('USMF')]
+[SysTestSecurity('CustInvoiceMana', [roleStr(TestEssentialsRole), roleStr(CustInvoiceAccountsReceivableManager)], false)]
+public final class pekSalesTablePostingScenarioTest extends SysTestCase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testSalesOrderConfirmationPosting</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that a sales order confirmation is created
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testSalesOrderConfirmationPosting()
+    {
+        // Arrange
+        AtlEntitySalesOrder salesOrderEntity = this.createSalesOrder();
+
+        SalesTable salesTable = salesOrderEntity.record();
+
+        // Act
+        using (SalesTableFormAdaptor salesTableForm = SalesTableFormAdaptor::open(salesTable))
+        {
+            salesTableForm.buttonUpdateConfirmation().click();
+            this.postDocumentAction();   
+        }
+
+        //Assert
+        this.assertTrue(CustConfirmJour::exist(salesTable.SalesId), 'No confirmation journal created');
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>postDocumentAction</Name>
+				<Source><![CDATA[
+    private void postDocumentAction()
+    {
+        using (SalesEditLinesFormAdaptor salesEditLinesForm = SalesEditLinesFormAdaptor::attach())
+        {
+            if (salesEditLinesForm.specQty().enabled())
+            {
+                salesEditLinesForm.specQty().setValue(SalesUpdate::All);
+            }
+            
+            salesEditLinesForm.OK().click();
+
+            using (SysBoxFormFormAdaptor sysBoxForm = SysBoxFormFormAdaptor::attach())
+            {
+                sysBoxForm.Ok().click();
+            }
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>createSalesOrder</Name>
+				<Source><![CDATA[
+    private AtlEntitySalesOrder createSalesOrder()
+    {
+        const ItemId ItemId = '1000';
+        const SalesPrice Price = 100;
+        const CustAccount CustomerId = 'US-002';
+        const InventLocationId InventLocationId = '13';
+        const Qty SalesQuantity = 1;
+
+        AtlDataRootNode data = AtlDataRootNode::construct();
+        
+        AtlDataSales sales = data.sales();
+
+        InventLocation warehouse = InventLocation::find(InventLocationId);
+
+        AtlEntitySalesOrder salesOrder = sales.salesOrders().initDefault().setCustomerAccount(CustomerId).save();
+
+        AtlEntitySalesOrderLine salesLine = salesOrder.addLine()
+            .setItem(ItemId)
+            .setQuantity(SalesQuantity)
+            .setInventDims([warehouse])
+            .setPrice(Price)
+            .save();
+
+        return salesOrder;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekDataCreation</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class containg helper methods to quickly setup data for unit tests
+/// </summary>
+public final class pekDataCreation
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>createCustGroup</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Create a new <c>pekCustGroup</c>
+    /// </summary>
+    /// <param name = "_id">Id of record</param>
+    /// <param name = "_name">Name to be applied to pek customer group</param>
+    /// <returns>The newly created <c>pekCustGroup</c> record</returns>
+    public static pekCustGroup createCustGroup(SysGroup _id, Name _name)
+    {
+        pekCustGroup pekCustGroup;
+
+        ttsbegin;
+        pekCustGroup.initValue();
+        pekCustGroup.CustGroup = _id;
+        pekCustGroup.Name = _name;
+        pekCustGroup.insert();
+        ttscommit;
+
+        return pekCustGroup;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

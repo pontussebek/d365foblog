@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekRuleCheckBadExampleTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekRuleCheckBadExample), UtilElementType::Class)]
+public final class pekRuleCheckBadExampleTest extends SysTestCase
+{
+    pekRuleCheckContract ruleCheckContract;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testShouldRuleBeEvaluatedTrueCheckRuleFalse</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test that the expected result is returned when rule should be evaluated and check should return false
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testShouldRuleBeEvaluatedTrueCheckRuleFalse()
+    {
+        //Arrange
+        SalesTable salesTable;
+
+        pekRuleBlockExample pekRuleBlockExample = pekRuleBlockExample::newPekRuleBlockExampleFromSalesTable(salesTable);
+
+        pekRuleCheckBadExample pekRuleCheckBadExample = 
+            pekRuleCheckBadExample::newFromBlockRule(pekRuleBlockExample);
+
+        //Act
+        boolean result = pekRuleCheckBadExample.checkRule(ruleCheckContract);
+
+        //Assert
+        this.assertFalse(result);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
