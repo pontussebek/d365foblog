@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekFeatureManagementVisibilityManager</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Class used to check if a feature is active
+/// </summary>
+public final class pekFeatureManagementVisibilityManager
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>isEnabled</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Is the feature pekTestingFeature enabled
+    /// </summary>
+    /// <returns>True if the feature is enabled; otherwise false</returns>
+    public static boolean isEnabled()
+    {
+        return FeatureStateProvider::isFeatureEnabled(pekTestingFeature::instance());
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
