@@ -1,5 +1,6 @@
 ## Ignore Dynamics 365 files
 /Metadata/**/bin
+/Metadata/**/Reports
 /Metadata/**/Resources
 /Metadata/**/WebContent
 /Metadata/**/XppMetadata
