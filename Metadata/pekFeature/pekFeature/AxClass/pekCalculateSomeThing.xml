@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCalculateSomeThing</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Calculates a value where the result depends on feature is enabled. 
+/// </summary>
+public class pekCalculateSomeThing
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getCalculatedValue</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Returns calculated value
+    /// </summary>
+    /// <returns>Two if <c>pekTestingFeature</c> is enabled, otherwise one</returns>
+    public int getCalculatedValue()
+    {
+        int calculatedValue = 1;
+
+        if (pekFeatureManagementVisibilityManager::isEnabled())
+        {
+            calculatedValue += 1;
+        }
+
+        return calculatedValue;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

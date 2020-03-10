@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekCalculateSomeThingFeatureDisabled</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestGranularity(SysTestGranularity::Unit)]
+[SysTestTarget(classStr(pekCalculateSomeThing), UtilElementType::Class)]
+[SysTestFeatureDependency(classStr(pekTestingFeature), false)]
+public final class pekCalculateSomeThingFeatureDisabled extends SysTestCase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testGetCalculatedValue</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Test the calculation with feature disabled
+    /// </summary>
+    [SysTestCheckInTest]
+    public void testGetCalculatedValue()
+    {
+        //Arrange
+        const int expectedValue = 1;
+
+        pekCalculateSomeThing pekCalculateSomeThing = new pekCalculateSomeThing();
+
+        //Act
+        int value = pekCalculateSomeThing.getCalculatedValue();
+
+        //Assert
+        this.assertEquals(expectedValue, value);
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
