@@ -115,8 +115,7 @@ public final class pekSpaceShipFeature implements
     [Hookable(false)]
     public boolean canDisable()
     {
-        //return true;
-        return !Microsoft.Dynamics.ApplicationPlatform.FeatureExposure.FeatureStateProvider::isFeatureEnabled(pekSpaceShipWarpDriveFeature::instance());
+        return true;
     }
 
 ]]></Source>
