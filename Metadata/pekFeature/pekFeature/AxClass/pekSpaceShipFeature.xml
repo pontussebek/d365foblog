@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekSpaceShipFeature</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+using System.ComponentModel.Composition;
+using Microsoft.Dynamics.ApplicationPlatform.FeatureExposure;
+using Microsoft.Dynamics.BusinessPlatform.SharedTypes;
+
+/// <summary>
+/// Represents a space ship engine feature.
+/// </summary>
+[Export(identifierStr(Microsoft.Dynamics.ApplicationPlatform.FeatureExposure.IFeatureMetadata))]
+public final class pekSpaceShipFeature implements
+    Microsoft.Dynamics.ApplicationPlatform.FeatureExposure.IFeatureMetadata,
+    IFeaturePrerequisites
+{
+    private static pekSpaceShipFeature instance;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    private void new()
+    {
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>TypeNew</Name>
+				<Source><![CDATA[
+    private static void TypeNew()
+    {
+        instance = new pekSpaceShipFeature();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>instance</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Obtains the singleton object instance.
+    /// </summary>
+    /// <returns>An <c>pekSpaceShipFeature</c> instance.</returns>
+    [Hookable(false)]
+    public static pekSpaceShipFeature instance()
+    {
+        return pekSpaceShipFeature::instance;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>label</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public FeatureLabelId label()
+    {
+        return 'Spaceship';
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>module</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public int module()
+    {
+        return FeatureModuleV0::ISV;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>summary</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public FeatureLabelId summary()
+    {
+        return 'Spaceship summary';
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>learnMoreUrl</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public WebSiteURL learnMoreUrl()
+    {
+        return 'https://ponekbladh.blogspot.com/';
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isEnabledByDefault</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public boolean isEnabledByDefault()
+    {
+        return false;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canDisable</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public boolean canDisable()
+    {
+        //return true;
+        return !Microsoft.Dynamics.ApplicationPlatform.FeatureExposure.FeatureStateProvider::isFeatureEnabled(pekSpaceShipWarpDriveFeature::instance());
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isEnabled</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Determines whether the feature is enabled.
+    /// </summary>
+    /// <returns>True, if the feature is enabled; otherwise, false.</returns>
+    [Hookable(false)]
+    public static boolean isEnabled()
+    {
+        return Microsoft.Dynamics.ApplicationPlatform.FeatureExposure.FeatureStateProvider::isFeatureEnabled(pekSpaceShipFeature::instance());
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>canEnable</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public boolean canEnable()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>cannotEnableMessage</Name>
+				<Source><![CDATA[
+    [Hookable(false)]
+    public final LabelString cannotEnableMessage()
+    {
+        return 'Not possible to enable Spaceship due to prerequiste';
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
