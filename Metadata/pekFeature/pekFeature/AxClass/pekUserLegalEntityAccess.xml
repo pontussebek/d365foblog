@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekUserLegalEntityAccess</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Old AX 2012 code to find all legal entities that a user has access to by org hiearchy
+/// </summary>
+class pekUserLegalEntityAccess
+{
+    UserId userId;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>isUserCompanyRestricted</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Used to check if a user is limited to a specific set of companies.
+    /// </summary>
+    /// <param name = "_userid"></param>
+    /// <returns></returns>
+    static public boolean isUserCompanyRestricted(UserId _userid = curUserId())
+    {
+        pekUserLegalEntityAccess pekUserLegalEntityAccess;
+
+        pekUserLegalEntityAccess = pekUserLegalEntityAccess::construct(_userid);
+
+        return pekUserLegalEntityAccess.isUserLegalEntityRestricted();
+
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmUserId</Name>
+				<Source><![CDATA[
+    public UserId parmUserId(UserId _userId = userId)
+    {
+        userId = _userId;
+
+        return userId;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>construct</Name>
+				<Source><![CDATA[
+    public static pekUserLegalEntityAccess construct(UserId _userId = '')
+    {
+        pekUserLegalEntityAccess pekUserLegalEntityAccess;
+
+        pekUserLegalEntityAccess = new pekUserLegalEntityAccess();
+
+        if(_userId)
+        {
+            pekUserLegalEntityAccess.parmUserId(_userId);
+        }
+
+        return pekUserLegalEntityAccess;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>userLedgerEntityAccess</Name>
+				<Source><![CDATA[
+    public Set userLedgerEntityAccess()
+    {
+        Set                     legalEntities;
+
+        legalEntities = new Set(Types::Int64);
+
+        if(!this.isUserLegalEntityRestricted())
+        {
+            legalEntities = this.addAllLegalEntities();
+        }
+        else
+        {
+            legalEntities = this.getRestrictedUserLegalEntities();
+        }
+
+        return legalEntities;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>isUserLegalEntityRestricted</Name>
+				<Source><![CDATA[
+    public boolean isUserLegalEntityRestricted()
+    {
+        SecurityUserRole            securityUserRole;
+        SecurityRole                secRule;
+        boolean                     retValue;
+        OMUserRoleOrganization      omUserRoleOrganization;
+        Set                         securityRolesAssignedToCompAndUser;
+        Set                         securityRolesAssignedToUser;
+        Set                         securityRolesWithNoCompanyLimit;
+        ;
+        securityRolesAssignedToCompAndUser = new Set(Types::Int64);
+        securityRolesAssignedToUser = new Set(Types::Int64);
+
+        while select omUserRoleOrganization
+        where omUserRoleOrganization.User == userId
+        {
+            securityRolesAssignedToCompAndUser.add(omUserRoleOrganization.SecurityRole);
+        }
+
+        //No company specific settings, give access to all.
+        if(securityRolesAssignedToCompAndUser.elements() == 0)
+        return false;
+
+        while select securityUserRole
+        where securityUserRole.User == userId
+        {
+            securityRolesAssignedToUser.add(securityUserRole.SecurityRole);
+        }
+
+        securityRolesWithNoCompanyLimit =
+        Set::difference(securityRolesAssignedToUser,securityRolesAssignedToCompAndUser);
+
+        //User is assigned a role with no company limit, give access to all.
+        if(securityRolesWithNoCompanyLimit.elements() > 0)
+        return false;
+
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>addAllLegalEntities</Name>
+				<Source><![CDATA[
+    private Set addAllLegalEntities()
+    {
+        CompanyInfo companyInfo;
+        Set         allLegalEntities;
+
+        allLegalEntities = new Set(Types::Int64);
+
+        while select RecId from companyInfo
+        {
+            allLegalEntities.add(companyInfo.RecId);
+        }
+
+        return allLegalEntities;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>findChildLegalEntity</Name>
+				<Source><![CDATA[
+    private Set findChildLegalEntity(OMOrganizationNode _node)
+    {
+        Set                     legalEntities;
+        Set                     childlegalEntities;
+        SetEnumerator           setEnum;
+        Array                   children;
+        int                     i;
+        OMOrganizationNode      child;
+        ;
+        legalEntities = new Set(Types::Int64);
+        legalEntities.add(_node.parmID());
+
+        if(_node.hasChildren())
+        {
+            children        = _node.childNodes();
+            for(i = 1; i <= children.lastIndex() ; i++)
+            {
+                child = children.value(i);
+                if(child)
+                {
+                    if(child.hasChildren())
+                    {
+                        childlegalEntities = this.findChildLegalEntity(child);
+                        setEnum = childlegalEntities.getEnumerator();
+                        while(setEnum.moveNext())
+                        {
+                            if(!legalEntities.in(setEnum.current()))
+                            {
+                                legalEntities.add(setEnum.current());
+                            }
+                        }
+                    }
+                    else if(child.isLegalEntity())
+                    {
+                        if(!legalEntities.in(child.parmID()))
+                        {
+                            legalEntities.add(child.parmID());
+                        }
+                    }
+                }
+            }
+        }
+        return legalEntities;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>getRestrictedUserLegalEntities</Name>
+				<Source><![CDATA[
+    private Set getRestrictedUserLegalEntities()
+    {
+        OMOrganizationHierarchy oMOrganizationHierarchy;
+        OMUserRoleOrganization  oMUserRoleOrganization;
+        OMOrganizationNode      oMOrganizationNode;
+        OMHierarchyType         oMHierarchyType;
+        Set                     legalEntities,legalEntitiesChild;
+        SetEnumerator           se;
+
+        legalEntities = new Set(Types::Int64);
+
+        while select oMUserRoleOrganization
+        where oMUserRoleOrganization.User == userId
+        {
+            if(oMUserRoleOrganization.OMHierarchyType == 0)
+            {
+                //add single specified organizations.
+                legalEntities.add(oMUserRoleOrganization.OMInternalOrganization);
+            }
+            else
+            {
+                //add header org
+                legalEntities.add(oMUserRoleOrganization.OMInternalOrganization);
+
+                //Add children in specified organization hierarchy.
+                while select oMHierarchyType
+                where oMHierarchyType.RecId == oMUserRoleOrganization.OMHierarchyType
+                {
+                    oMOrganizationHierarchy =
+                    new OMOrganizationHierarchy(
+                        OMMultipleHierarchy::construct(oMHierarchyType.Name));
+
+                    oMOrganizationNode = oMOrganizationHierarchy.findNode(oMUserRoleOrganization.OMInternalOrganization);
+
+                    if(oMOrganizationNode)
+                    {
+                        legalEntitiesChild = this.findChildLegalEntity(oMOrganizationNode);
+                        se = legalEntitiesChild.getEnumerator();
+                        while (se.moveNext())
+                        {
+                            if(!legalEntities.in(se.current()))
+                            {
+                                legalEntities.add(se.current());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return legalEntities;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
