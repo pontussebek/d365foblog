@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekInventTransferTableTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[SysTestCaseDataDependency('USMF')]
+[SysTestGranularity(SysTestGranularity::Integration)]
+public class pekInventTransferTableTest extends SysTestCase
+{    
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>createTransferOrderWithLine</Name>
+				<Source><![CDATA[
+    [SysTestMethod]
+    public void createTransferOrderWithLine()
+    {
+        //Arrange
+        InventTransferTable inventTransferTable;
+        InventTransferLine  inventTransferLine;
+
+        //Act
+        inventTransferTable = pekInventTransferOrdersTestDataCreator::createInventTransferTable();
+        inventTransferLine = pekInventTransferOrdersTestDataCreator::createInventTransferLine(inventTransferTable.TransferId);
+
+        //Assert
+        this.assertNotNull(inventTransferTable, 'TO header should have been created');
+        this.assertNotNull(inventTransferLine, 'TO line should have been created');
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

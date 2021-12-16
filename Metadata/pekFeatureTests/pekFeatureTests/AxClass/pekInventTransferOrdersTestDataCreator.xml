@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekInventTransferOrdersTestDataCreator</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Used for creating transfer orders in USMF for testing
+/// </summary>
+public class pekInventTransferOrdersTestDataCreator
+{
+    private const str defaultTransferId = 'UT0001';
+    private const str defaultTransferTo = '11';
+    private const str defaultTransferFrom = '32';
+    private const str defaultTransferTransit = '39';
+    private const str defaultItemId = 'P0111';
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>createInventTransferLine</Name>
+				<Source><![CDATA[
+    public static InventTransferLine createInventTransferLine(
+        InventTransferId _transferId = defaultTransferId,
+        ItemId _itemId = defaultItemId,
+        InventQty _qty = 1,
+        LineNum _lineNum = 1.0)
+    {
+        if (!_transferId)
+        {
+            _transferId = defaultTransferId;
+        }
+
+        if (!_itemId)
+        {
+            _itemId = defaultItemId;
+        }
+
+        InventTransferLine inventTransferLine = InventTransferLine::find(_transferId, _lineNum, true);
+
+        if (inventTransferLine.RecId)
+        {
+            return inventTransferLine;
+        }
+
+        InventTransferTable inventTransferTable = InventTransferTable::find(_transferId);
+        if (!inventTransferTable.RecId)
+        {
+            throw Error('transfer order not found');
+        }
+
+        InventTable inventTable = InventTable::find(_itemId);
+        if (!inventTable.RecId)
+        {
+            throw Error('item not found');
+        }
+
+        InventDim inventDim = InventDim::findOrCreateBlank();
+
+        inventTransferLine.initFromInventTable(inventTable);
+        inventTransferLine.ItemId = inventTable.ItemId;
+        inventTransferLine.InventDimId = inventDim.InventDimId;            
+        inventTransferLine.initFromInventTransferTable(inventTransferTable,true);
+        inventTransferLine.LineNum = _lineNum;
+
+        inventTransferLine.QtyTransfer = _qty;
+        inventTransferLine.QtyRemainShip = _qty;
+        inventTransferLine.QtyRemainReceive = _qty;
+
+        ttsbegin;
+        inventTransferLine.insert();
+        ttscommit;
+
+        return inventTransferLine;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>createInventTransferTable</Name>
+				<Source><![CDATA[
+    public static InventTransferTable createInventTransferTable(
+        InventTransferId            _transferId = defaultTransferId,
+        InventLocationIdFrom        _locationFrom = defaultTransferFrom,
+        InventLocationIdTo          _locationTo = defaultTransferTo,
+        InventLocationIdTransit     _locationTransit = defaultTransferTransit)
+    {
+        InventTransferTable inventTransferTable = InventTransferTable::find(_transferId);
+
+        if (inventTransferTable.RecId)
+        {
+            return inventTransferTable;
+        }
+
+        if (!InventLocation::exist(_locationFrom))
+        {
+            throw Error('from location not found');
+        }
+
+        if (!InventLocation::exist(_locationTo))
+        {
+            throw Error('to location not found');
+        }
+
+        if (!InventLocation::exist(_locationTransit))
+        {
+            throw Error('transit location not found');
+        }
+
+        inventTransferTable.initValue();
+        inventTransferTable.TransferId = _transferId;
+
+        inventTransferTable.InventLocationIdFrom = _locationFrom;
+        inventTransferTable.InventLocationIdTo = _locationTo;
+        inventTransferTable.InventLocationIdTransit = _locationTransit;
+
+        inventTransferTable.initFromAddress();
+        inventTransferTable.initToAddress();
+
+        inventTransferTable.DlvModeId = '';
+        inventTransferTable.DlvTermId = '';
+        inventTransferTable.FromContactPerson = 0;
+        inventTransferTable.ToContactPerson = 0;
+        inventTransferTable.FreightZoneId = '';
+        inventTransferTable.FreightSlipType = FreightSlipType::None;
+
+        ttsbegin;
+        inventTransferTable.insert();
+        ttscommit;
+
+        return inventTransferTable;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -17,12 +17,15 @@
 		<d2p1:string>ApplicationSuite</d2p1:string>
 		<d2p1:string>AtlApplicationSuite</d2p1:string>
 		<d2p1:string>AtlFoundation</d2p1:string>
+		<d2p1:string>ContactPerson</d2p1:string>
+		<d2p1:string>Directory</d2p1:string>
 		<d2p1:string>pekFeature</d2p1:string>
 		<d2p1:string>Retail</d2p1:string>
 		<d2p1:string>TestEssentials</d2p1:string>
 	</ModuleReferences>
 	<Name>pekFeatureTests</Name>
 	<Publisher>pek</Publisher>
+	<SolutionId>00000000-0000-0000-0000-000000000000</SolutionId>
 	<VersionBuild>0</VersionBuild>
 	<VersionMajor>1</VersionMajor>
 	<VersionMinor>0</VersionMinor>
