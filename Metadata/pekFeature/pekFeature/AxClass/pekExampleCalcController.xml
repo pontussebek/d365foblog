@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekExampleCalcController</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public final class pekExampleCalcController extends SysOperationServiceController
+{
+    Common callerRecord;
+
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>canGoBatch</Name>
+				<Source><![CDATA[
+    public boolean canGoBatch()
+    {
+        return true;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>initFromCaller</Name>
+				<Source><![CDATA[
+    private void initFromCaller()
+    {
+        pekExampleContract contract = this.getDataContractObject();
+    
+        pekCustGroup pekCustGroup;
+    
+        switch (callerRecord.TableId)
+        {
+            case tableNum(pekCustGroup):
+                pekCustGroup = callerRecord as pekCustGroup;
+                break;
+        }
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>new</Name>
+				<Source><![CDATA[
+    protected void new(
+        identifierName _className= '',
+        identifierName _methodName= '',
+        SysOperationExecutionMode _executionMode = SysOperationExecutionMode::Synchronous)
+    {
+        super(_className, _methodName, _executionMode);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmCallerRecord</Name>
+				<Source><![CDATA[
+    public Common parmCallerRecord(Common _callerRecord = callerRecord)
+    {
+        callerRecord = _callerRecord;
+        return callerRecord;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>main</Name>
+				<Source><![CDATA[
+    public static void main(Args _args)
+    {
+        pekExampleCalcController controller;
+    
+        controller = pekExampleCalcController::newFromArgs(_args);
+        controller.initFromCaller();
+        controller.startOperation();
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>newFromArgs</Name>
+				<Source><![CDATA[
+    public static pekExampleCalcController newFromArgs(Args _args)
+    {
+        pekExampleCalcController controller;
+        identifierName className;
+        identifierName methodName;
+        SysOperationExecutionMode executionMode;
+    
+        [className, methodName, executionMode] = SysOperationServiceController::parseServiceInfo(_args);
+        
+        controller = new pekExampleCalcController(className, methodName, executionMode);
+        controller.parmArgs(_args);
+        controller.parmCallerRecord(_args.record());
+    
+        return controller;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

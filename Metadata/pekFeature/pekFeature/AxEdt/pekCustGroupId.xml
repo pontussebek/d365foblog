@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxEdt xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns=""
+	i:type="AxEdtString">
+	<Name>pekCustGroupId</Name>
+	<Extends>SysGroup</Extends>
+	<Label>@SYS3815</Label>
+	<ReferenceTable>pekCustGroup</ReferenceTable>
+	<ArrayElements />
+	<Relations />
+	<TableReferences>
+		<AxEdtTableReference>
+			<RelatedField>CustGroup</RelatedField>
+			<Table>pekCustGroup</Table>
+		</AxEdtTableReference>
+	</TableReferences>
+</AxEdt>

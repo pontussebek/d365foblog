@@ -15,7 +15,6 @@ public class pekCustGroup extends FormRun
 			<Method>
 				<Name>init</Name>
 				<Source><![CDATA[
-    //[Hookable(false)]
     public void init()
     {
         super();
@@ -25,7 +24,29 @@ public class pekCustGroup extends FormRun
 			</Method>
 		</Methods>
 		<DataSources xmlns="" />
-		<DataControls xmlns="" />
+		<DataControls xmlns="">
+			<Control>
+				<Name>pekExampleCalcController</Name>
+				<Type>MenuFunctionButton</Type>
+				<Methods>
+					<Method>
+						<Name>clicked</Name>
+						<Source><![CDATA[
+        /// <summary>
+        ///
+        /// </summary>
+        public void clicked()
+        {
+            super();
+
+            pekCustGroup_ds.research(true);
+        }
+
+]]></Source>
+					</Method>
+				</Methods>
+			</Control>
+		</DataControls>
 		<Members xmlns="" />
 	</SourceCode>
 	<DataSources>
@@ -93,6 +114,15 @@ public class pekCustGroup extends FormRun
 								<Type>Button</Type>
 								<FormControlExtension
 									i:nil="true" />
+							</AxFormControl>
+							<AxFormControl xmlns=""
+								i:type="AxFormMenuFunctionButtonControl">
+								<Name>pekExampleCalcController</Name>
+								<Type>MenuFunctionButton</Type>
+								<FormControlExtension
+									i:nil="true" />
+								<MenuItemName>pekExampleCalcController</MenuItemName>
+								<MenuItemType>Action</MenuItemType>
 							</AxFormControl>
 						</Controls>
 					</AxFormControl>

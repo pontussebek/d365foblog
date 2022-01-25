@@ -51,6 +51,29 @@ public class pekCustGroup extends common
 
 ]]></Source>
 			</Method>
+			<Method>
+				<Name>findByRecId</Name>
+				<Source><![CDATA[
+    public static pekCustGroup findByRecId(
+        pekCustGroupRefRecId _custGroupId ,
+        boolean _forupdate = false,
+        ConcurrencyModel _concurrencyModel = ConcurrencyModel::Auto)
+    {
+        pekCustGroup pekCustGroup;
+
+        pekCustGroup.selectForUpdate(_forupdate);
+        if (_forupdate && _concurrencyModel != ConcurrencyModel::Auto)
+        {
+            pekCustGroup.concurrencyModel(_concurrencyModel);
+        }
+
+        select firstonly pekCustGroup where pekCustGroup.RecId == _custGroupId;
+
+        return pekCustGroup;
+    }
+
+]]></Source>
+			</Method>
 		</Methods>
 	</SourceCode>
 	<ConfigurationKey>LedgerBasic</ConfigurationKey>
@@ -151,8 +174,7 @@ public class pekCustGroup extends common
 			<Name>CustGroup</Name>
 			<AllowEdit>No</AllowEdit>
 			<AssetClassification>Customer Content</AssetClassification>
-			<ExtendedDataType>SysGroup</ExtendedDataType>
-			<GroupPrompt>@SYS3815</GroupPrompt>
+			<ExtendedDataType>pekCustGroupId</ExtendedDataType>
 			<Mandatory>Yes</Mandatory>
 		</AxTableField>
 		<AxTableField xmlns=""

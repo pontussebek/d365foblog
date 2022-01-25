@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxMenu xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V1">
+	<Name>pekMenu</Name>
+	<Label>Pontus module</Label>
+	<Elements>
+		<AxMenuElement xmlns=""
+			i:type="AxMenuElementMenuItem">
+			<Name>pekCustGroup</Name>
+			<MenuItemName>pekCustGroup</MenuItemName>
+		</AxMenuElement>
+	</Elements>
+</AxMenu>

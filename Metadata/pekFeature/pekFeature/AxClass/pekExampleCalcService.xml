@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekExampleCalcService</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class pekExampleCalcService
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>calculateSomething</Name>
+				<Source><![CDATA[
+    private void calculateSomething(pekExampleContract _contract)
+    {
+        pekCustGroup pekCustGroupFrom, pekCustGroupTo;
+
+        /*ttsbegin;
+        pekCustGroupFrom = pekCustGroup::find(_contract.parmCustGroupIdFrom(), true);
+        pekCustGroupTo = pekCustGroup::find(_contract.parmCustGroupIdTo(), true);
+
+        str output = strFmt("From %1 and To %2"
+            ,pekCustGroupFrom.CustGroup
+            ,pekCustGroupTo.CustGroup);
+
+        setPrefix(output);
+
+        pekCustGroupTo.Name = pekCustGroupFrom.Name;
+        pekCustGroupTo.update();
+        ttscommit;*/
+        //info('working');
+
+        ttsbegin;
+        pekCustGroupFrom = pekCustGroup::find(_contract.parmCustGroupIdFrom());
+
+        while select forupdate pekCustGroupTo
+            where pekCustGroupTo.CustGroup != _contract.parmCustGroupIdFrom()
+        {
+            pekCustGroupTo.Name = pekCustGroupFrom.Name;
+            pekCustGroupTo.update();
+        }
+
+        ttscommit;
+
+
+
+
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

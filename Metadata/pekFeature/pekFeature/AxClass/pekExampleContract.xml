@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>pekExampleContract</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[DataContract]
+public class pekExampleContract
+{
+    pekCustGroupId custGroupIdFrom;
+    pekCustGroupId custGroupIdTo;
+    
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>parmCustGroupIdFrom</Name>
+				<Source><![CDATA[
+    [DataMember, SysOperationLabel('From group')]
+    public pekCustGroupId parmCustGroupIdFrom(pekCustGroupId _custGroupIdFrom = custGroupIdFrom)
+    {
+        custGroupIdFrom = _custGroupIdFrom;
+        return custGroupIdFrom;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>parmCustGroupIdTo</Name>
+				<Source><![CDATA[
+    [DataMember, SysOperationLabel('To group')]
+    public pekCustGroupId parmCustGroupIdTo(pekCustGroupId _custGroupIdTo = custGroupIdTo)
+    {
+        custGroupIdTo = _custGroupIdTo;
+        return custGroupIdTo;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
