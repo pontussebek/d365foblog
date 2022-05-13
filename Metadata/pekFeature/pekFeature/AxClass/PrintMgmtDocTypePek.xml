@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>PrintMgmtDocTypePek</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+class PrintMgmtDocTypePek
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>getDefaultReportFormatDelegate</Name>
+				<Source><![CDATA[
+    [SubscribesTo(classstr(PrintMgmtDocType), delegatestr(PrintMgmtDocType, getDefaultReportFormatDelegate))]
+    public static void getDefaultReportFormatDelegate(PrintMgmtDocumentType _docType, EventHandlerResult _result)
+    {
+        switch (_docType)
+        {
+            case PrintMgmtDocumentType::SalesOrderInvoice :
+                _result.result(ssrsReportStr(SalesInvoicePek, Report));
+                break;
+        }
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

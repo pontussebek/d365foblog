@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>SalesInvoiceDPPek_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[ExtensionOf(classStr(SalesInvoiceDP))]
+public final class SalesInvoiceDPPek_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>populateSalesInvoiceHeaderFooterTmp</Name>
+				<Source><![CDATA[
+    protected void populateSalesInvoiceHeaderFooterTmp(CustInvoiceJour _custInvoiceJour, CompanyInfo _companyInfo)
+    {
+        next populateSalesInvoiceHeaderFooterTmp(_custInvoiceJour, _companyInfo);
+        
+        salesInvoiceHeaderFooterTmp.pekSomeSetupValue = _custInvoiceJour.pekSomeSetupValue;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

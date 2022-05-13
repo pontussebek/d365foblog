@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxFormExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>CustTable.pekFeature</Name>
+	<ControlModifications />
+	<Controls>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControl1nro3roz1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormGroupControl">
+				<Name>pekFieldsFormGroup</Name>
+				<Type>Group</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormStringControl">
+						<Name>pekFieldsFormGroup_pekSomeSetupValue</Name>
+						<Type>String</Type>
+						<FormControlExtension
+							i:nil="true" />
+						<DataField>pekSomeSetupValue</DataField>
+						<DataSource>CustTable</DataSource>
+					</AxFormControl>
+				</Controls>
+				<DataGroup>pekFields</DataGroup>
+				<DataSource>CustTable</DataSource>
+			</FormControl>
+			<Parent>TabGeneral</Parent>
+		</AxFormExtensionControl>
+	</Controls>
+	<DataSourceModifications />
+	<DataSourceReferences />
+	<DataSources />
+	<Parts />
+	<PropertyModifications />
+</AxFormExtension>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>SalesTablePek_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[ExtensionOf(tableStr(SalesTable))]
+internal final class SalesTablePek_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>initFromCustTable</Name>
+				<Source><![CDATA[
+    void initFromCustTable()
+    {
+        next initFromCustTable();
+
+        CustTable custTable = this.custTable_CustAccount();
+
+        this.pekSomeSetupValue = custTable.pekSomeSetupValue;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

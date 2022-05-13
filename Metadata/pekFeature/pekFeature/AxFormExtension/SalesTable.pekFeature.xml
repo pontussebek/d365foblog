@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxFormExtension xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="Microsoft.Dynamics.AX.Metadata.V6">
+	<Name>SalesTable.pekFeature</Name>
+	<ControlModifications />
+	<Controls>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlbxykivw21</Name>
+			<FormControl xmlns=""
+				i:type="AxFormGroupControl">
+				<Name>pekFormGroupControl</Name>
+				<Type>Group</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormStringControl">
+						<Name>pekFormGroupControl_pekSomeSetupValue</Name>
+						<Type>String</Type>
+						<FormControlExtension
+							i:nil="true" />
+						<DataField>pekSomeSetupValue</DataField>
+						<DataSource>SalesTable</DataSource>
+					</AxFormControl>
+				</Controls>
+				<DataGroup>pekFields</DataGroup>
+				<DataSource>SalesTable</DataSource>
+			</FormControl>
+			<Parent>TabHeaderGeneral</Parent>
+		</AxFormExtensionControl>
+		<AxFormExtensionControl xmlns="">
+			<Name>FormExtensionControlr41m1fzp1</Name>
+			<FormControl xmlns=""
+				i:type="AxFormGroupControl">
+				<Name>pekFormGroupControl2</Name>
+				<Type>Group</Type>
+				<FormControlExtension
+					i:nil="true" />
+				<Controls>
+					<AxFormControl xmlns=""
+						i:type="AxFormStringControl">
+						<Name>pekFormGroupControl2_pekSomeSetupValue</Name>
+						<Type>String</Type>
+						<FormControlExtension
+							i:nil="true" />
+						<DataField>pekSomeSetupValue</DataField>
+						<DataSource>SalesTable</DataSource>
+					</AxFormControl>
+				</Controls>
+				<DataGroup>pekFields</DataGroup>
+				<DataSource>SalesTable</DataSource>
+			</FormControl>
+			<Parent>LineViewHeader</Parent>
+		</AxFormExtensionControl>
+	</Controls>
+	<DataSourceModifications />
+	<DataSourceReferences />
+	<DataSources />
+	<Parts />
+	<PropertyModifications />
+</AxFormExtension>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>CustInvoiceJourPek_Extension</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+[ExtensionOf(tableStr(CustInvoiceJour))]
+public final class CustInvoiceJourPek_Extension
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>initFromSalesTable</Name>
+				<Source><![CDATA[
+    public void initFromSalesTable(SalesTable salesTable, SalesParmTable _salesParmTable)
+    {
+        next initFromSalesTable(salesTable, _salesParmTable);
+
+        this.pekSomeSetupValue = salesTable.pekSomeSetupValue;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
